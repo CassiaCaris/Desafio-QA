@@ -1,7 +1,5 @@
 require 'test/unit'
-require_relative './teste_05.rb'
-
-
+require_relative 'Checkout.rb'
 
 class TestPrice < Test::Unit::TestCase
 
