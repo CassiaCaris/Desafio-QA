@@ -1,59 +1,53 @@
 class ProdutItem
-  attr_reader :item, :price_unit, :qtde
+  
+  attr_reader :price_unit, :item, :price_promo
 
-  def initialize(item, price_unit, qtde)
-    @item = item
+  def initialize(price_unit: , item: 1, price_promo: price_unit)
     @price_unit = price_unit
-    @qtde = qtde
+    @item = item
+    @price_promo = price_promo
   end
 
-  def calc_qtde
-    (price_unit * qtde)
+  def price_qtde(units)
+    units_promo = units / @item
+    units_excl_offer = units % @item
+    @price_promo * units_promo + @price_promo * units_excl_offer
   end
 
 end
 
-class CalcDiscount
-  attr_reader :discount
-
-  def initialize(discount)
-    @discount = discount
-  end
-
-  def calc_desc(product)
-    (product.price_unit * product.qtde) - discount
-  end
-end
-
-RULES = [A: {prodA: ProdutItem.new("A", 0.50, 3), descA: CalcDiscount.new(0.20)},
-         B: {prodB: ProdutItem.new("B", 0.30, 2), descB: CalcDiscount.new(0.15)},
-         C: {prodC: ProdutItem.new("C", 0.20, 0), descC: CalcDiscount.new(0.00)},
-         D: {prodD: ProdutItem.new("D", 0.15, 0), descD: CalcDiscount.new(0.00)}
-        ]
+RULES = {
+  " " => ProdutItem.new(price_unit: 0),
+  "A" => ProdutItem.new(price_unit: 50, item: 3, price_promo: 130),
+  "B" => ProdutItem.new(price_unit: 30, item: 2, price_promo: 45),
+  "C" => ProdutItem.new(price_unit: 20),
+  "D" => ProdutItem.new(price_unit: 15)
+}
 
 class CheckOut
 
-  def initialize(rules)
-      @rules = rules
-      @itens = Hash.new
-    end
-
-  def price(item, quantidade)
-    if regras(item)
-       regras(item).price(quantidade)
-    else
-      raise "O item '#{item}' é invalido"
-    end
+  def initialize(price_list)
+    @rules = price_list
+    @items = Hash.new
   end
 
   def scan(item)
+    raise "O item '#{item}' é invalido" unless @rules.keys.include? item
     @items[item] ||= 0
     @items[item] += 1
   end
 
-  def regras(item)
-    @regras[item]
+  def total
+    subtotal = 0
+
+    @items.keys.each do |i|
+
+      good, units = @rules[i], @items[i]
+      subtotal += good.price_qtde(units)
+
+    end
+
+    subtotal
+
   end
-
-
 end
