@@ -3,11 +3,14 @@
 ## Objetivo do Desafio
 
 Verificar suas habilidades em conceber cenários de testes e em programação, necessárias para automatização dos testes.
-Para isso você deverá conceber cenários para duas funcionalidades do Whatsapp e resolver o exercício 09 do site CodeKata, que também pode ser encontrado aqui.
-Deve conter
-Especificação de duas funcionalidades do Whatsapp (não importa se o app é Android, iOS, Windows Phone ou versão Web) em Gherkin ou Gauge
-Cada especificação deve conter ao menos um cenário de teste
-Resposta do exercício 09 do site CodeKata, ou aqui, na linguagem de programação que lhe for mais conveniente
+
+Para isso você deverá conceber cenários para duas funcionalidades do Whatsapp e resolver o exercício 09 do site [CodeKata](http://www.codekata.com), que também pode ser encontrado [aqui](Kata09.md).
+
+### Deve conter ###
+
+* Especificação de duas funcionalidades do Whatsapp (não importa se o app é Android, iOS, Windows Phone ou versão Web) em Gherkin ou Gauge
+* Cada especificação deve conter ao menos um cenário de teste
+* Resposta do exercício 09 do site [CodeKata](http://www.codekata.com), ou [aqui](Kata09.md), na linguagem de programação que lhe for mais conveniente
 
 ## Kata09: Back to the Checkout
 http://codekata.com/kata/kata09-back-to-the-checkout/
@@ -20,5 +23,3 @@ B	30	2 for 45
 C	20
 D	15
 Our checkout accepts items in any order, so that if we scan a B, an A, and another B, we’ll recognize the two B’s and price them at 45 (for a total price so far of 95). Because the pricing changes frequently, we need to be able to pass in a set of pricing rules each time we start handling a checkout transaction.
-
-##....
